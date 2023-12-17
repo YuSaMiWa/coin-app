@@ -1,3 +1,6 @@
+import 'dart:io';
+
+
 import 'package:flutter/material.dart';
 import 'package:cat_motion/design/colors.dart';
 import 'package:cat_motion/design/dimensions.dart';
@@ -5,6 +8,7 @@ import 'package:cat_motion/design/images.dart';
 import 'package:cat_motion/pages/end_button.dart';
 import 'package:cat_motion/design/widgets/return_button.dart';
 import 'package:cat_motion/pages/second_page.dart';
+import 'package:cat_motion/design/widgets/accent_button.dart';
 
 
 class BildTextPage extends StatelessWidget {
@@ -12,7 +16,7 @@ class BildTextPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: <Widget>[_bildText(), _returnButton(context), _endButton(context)]);
+    return Stack(children: <Widget>[_bildText(), Align(alignment: Alignment.bottomLeft, child: _returnButton(context)), Align(alignment: Alignment.bottomRight, child: _endButton(context))]);
   }
   Widget _bildText(){
     return Scaffold(
@@ -120,18 +124,28 @@ class BildTextPage extends StatelessWidget {
     );
   }
   Widget _endButton(context){
-      return Align(alignment: Alignment.bottomRight, 
-      child: EndButton(title: 'Exit', onTap:() {
-        Navigator.pop(context);
-      }));
+       return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(left: padding16, right: padding16, bottom:padding8),
+        child: AccentButton(
+            title: 'Exit',
+            onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => exit(0)));
+        }),
+       ),
+       );
     }
   Widget _returnButton(context){
-      return Align(alignment: Alignment.bottomLeft, 
+      return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(left: padding16, right: padding16, bottom:padding8), 
       child: ReturnButton(title: 'Try again', onTap:() {
         Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const SecondPage()),
               );
-      }));
+      }),
+      ),
+      );
     }
 }

@@ -11,6 +11,7 @@ const double padding8 = 8;
 const double padding4 = 4;
 const double padding0 = 0;
 const double padding50 = 50;
+const double padding116 =116;
 
 const double fontSize12 = 12;
 const double fontSize14 = 14;
